@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "blocker": 1,
+    "unknown": 1,
+    "review": 0,
+    "ready": 1
+  },
+  "repositories": [
+    {
+      "name": "synthetic-legacy",
+      "status": "blocker",
+      "findings": [
+        {
+          "severity": "blocker",
+          "field": "owner",
+          "message": "Required value is empty.",
+          "action": "Assign a valid owner."
+        },
+        {
+          "severity": "review",
+          "field": "uses_lfs",
+          "message": "Git LFS objects require separate verification.",
+          "action": "Transfer LFS objects and verify availability from a fresh clone."
+        },
+        {
+          "severity": "review",
+          "field": "hooks",
+          "message": "Service hooks require target reconfiguration.",
+          "action": "Recreate and test hooks with target credentials."
+        },
+        {
+          "severity": "review",
+          "field": "pipeline_dependencies",
+          "message": "External pipeline dependencies exist.",
+          "action": "Map pipelines, agents, service connections, secrets and artifact feeds."
+        },
+        {
+          "severity": "blocker",
+          "field": "unmapped_identities",
+          "message": "Identity mappings are unresolved.",
+          "action": "Resolve target identities and verify permissions with owners."
+        }
+      ]
+    },
+    {
+      "name": "synthetic-payments",
+      "status": "ready",
+      "findings": []
+    },
+    {
+      "name": "synthetic-undiscovered",
+      "status": "unknown",
+      "findings": [
+        {
+          "severity": "unknown",
+          "field": "owner",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify owner."
+        },
+        {
+          "severity": "unknown",
+          "field": "default_branch",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify default_branch."
+        },
+        {
+          "severity": "unknown",
+          "field": "branches",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify branches."
+        },
+        {
+          "severity": "unknown",
+          "field": "archived",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify archived."
+        },
+        {
+          "severity": "unknown",
+          "field": "uses_lfs",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify uses_lfs."
+        },
+        {
+          "severity": "unknown",
+          "field": "hooks",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify hooks."
+        },
+        {
+          "severity": "unknown",
+          "field": "pipeline_dependencies",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify pipeline_dependencies."
+        },
+        {
+          "severity": "unknown",
+          "field": "unmapped_identities",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify unmapped_identities."
+        }
+      ]
+    }
+  ]
+}

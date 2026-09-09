@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "repositories": [
+    {
+      "name": "synthetic-payments",
+      "owner": "platform-team",
+      "default_branch": "main",
+      "branches": [
+        "main"
+      ],
+      "archived": false,
+      "uses_lfs": false,
+      "hooks": [],
+      "pipeline_dependencies": [],
+      "unmapped_identities": []
+    },
+    {
+      "name": "synthetic-legacy",
+      "owner": "",
+      "default_branch": "main",
+      "branches": [
+        "main"
+      ],
+      "archived": false,
+      "uses_lfs": true,
+      "hooks": [
+        "build-event"
+      ],
+      "pipeline_dependencies": [
+        "self-hosted-windows-agent"
+      ],
+      "unmapped_identities": [
+        "former-contributor"
+      ]
+    },
+    {
+      "name": "synthetic-undiscovered"
+    }
+  ]
+}
