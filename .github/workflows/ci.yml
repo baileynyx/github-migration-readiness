@@ -18,6 +18,9 @@ jobs:
       - run: python -m unittest discover -s tests -v
       # The sample deliberately contains blockers; generate it without failing CI.
       - run: python readiness.py examples/inventory.json --output-dir reports --fail-on never
+      # Keep the full assessment separate from the original minimal example.
+      # Both deliberately contain findings; the tests verify blocking exit codes.
+      - run: python readiness.py examples/migration-assessment/inventory.json --output-dir reports/migration-assessment --fail-on never
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: synthetic-readiness-report

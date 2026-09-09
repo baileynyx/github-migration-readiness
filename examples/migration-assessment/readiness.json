@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "blocker": 1,
+    "unknown": 1,
+    "review": 3,
+    "ready": 1
+  },
+  "repositories": [
+    {
+      "name": "synthetic-audit-archive",
+      "status": "review",
+      "findings": [
+        {
+          "severity": "review",
+          "field": "archived",
+          "message": "Repository is archived.",
+          "action": "Confirm inclusion and preserve read-only intent at cutover."
+        }
+      ]
+    },
+    {
+      "name": "synthetic-catalog-api",
+      "status": "ready",
+      "findings": []
+    },
+    {
+      "name": "synthetic-legacy-orders",
+      "status": "blocker",
+      "findings": [
+        {
+          "severity": "blocker",
+          "field": "owner",
+          "message": "Required value is empty.",
+          "action": "Assign a valid owner."
+        },
+        {
+          "severity": "blocker",
+          "field": "branches",
+          "message": "Default branch is absent from the ref inventory.",
+          "action": "Reconcile the default branch and exported refs."
+        },
+        {
+          "severity": "review",
+          "field": "hooks",
+          "message": "Service hooks require target reconfiguration.",
+          "action": "Recreate and test hooks with target credentials."
+        },
+        {
+          "severity": "review",
+          "field": "pipeline_dependencies",
+          "message": "External pipeline dependencies exist.",
+          "action": "Map pipelines, agents, service connections, secrets and artifact feeds."
+        },
+        {
+          "severity": "blocker",
+          "field": "unmapped_identities",
+          "message": "Identity mappings are unresolved.",
+          "action": "Resolve target identities and verify permissions with owners."
+        }
+      ]
+    },
+    {
+      "name": "synthetic-media-assets",
+      "status": "review",
+      "findings": [
+        {
+          "severity": "review",
+          "field": "uses_lfs",
+          "message": "Git LFS objects require separate verification.",
+          "action": "Transfer LFS objects and verify availability from a fresh clone."
+        }
+      ]
+    },
+    {
+      "name": "synthetic-release-tools",
+      "status": "review",
+      "findings": [
+        {
+          "severity": "review",
+          "field": "hooks",
+          "message": "Service hooks require target reconfiguration.",
+          "action": "Recreate and test hooks with target credentials."
+        },
+        {
+          "severity": "review",
+          "field": "pipeline_dependencies",
+          "message": "External pipeline dependencies exist.",
+          "action": "Map pipelines, agents, service connections, secrets and artifact feeds."
+        }
+      ]
+    },
+    {
+      "name": "synthetic-undiscovered-worker",
+      "status": "unknown",
+      "findings": [
+        {
+          "severity": "unknown",
+          "field": "branches",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify branches."
+        },
+        {
+          "severity": "unknown",
+          "field": "uses_lfs",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify uses_lfs."
+        },
+        {
+          "severity": "unknown",
+          "field": "hooks",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify hooks."
+        },
+        {
+          "severity": "unknown",
+          "field": "pipeline_dependencies",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify pipeline_dependencies."
+        },
+        {
+          "severity": "unknown",
+          "field": "unmapped_identities",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify unmapped_identities."
+        }
+      ]
+    }
+  ]
+}
