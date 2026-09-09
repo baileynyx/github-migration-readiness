@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "repositories": [
+    {
+      "name": "synthetic-catalog-api",
+      "owner": "catalog-team",
+      "default_branch": "main",
+      "branches": [
+        "main",
+        "release/1.0"
+      ],
+      "archived": false,
+      "uses_lfs": false,
+      "hooks": [],
+      "pipeline_dependencies": [],
+      "unmapped_identities": []
+    },
+    {
+      "name": "synthetic-legacy-orders",
+      "owner": "",
+      "default_branch": "master",
+      "branches": [
+        "main",
+        "release/2.4"
+      ],
+      "archived": false,
+      "uses_lfs": false,
+      "hooks": [
+        "order-build-status"
+      ],
+      "pipeline_dependencies": [
+        "windows-build-agent",
+        "orders-artifact-feed"
+      ],
+      "unmapped_identities": [
+        "former-orders-contributor"
+      ]
+    },
+    {
+      "name": "synthetic-media-assets",
+      "owner": "content-team",
+      "default_branch": "main",
+      "branches": [
+        "main",
+        "release/1.0"
+      ],
+      "archived": false,
+      "uses_lfs": true,
+      "hooks": [],
+      "pipeline_dependencies": [],
+      "unmapped_identities": []
+    },
+    {
+      "name": "synthetic-release-tools",
+      "owner": "release-engineering",
+      "default_branch": "main",
+      "branches": [
+        "main",
+        "release/1.0"
+      ],
+      "archived": false,
+      "uses_lfs": false,
+      "hooks": [
+        "release-notification"
+      ],
+      "pipeline_dependencies": [
+        "azure-release-service-connection",
+        "production-approval",
+        "shared-build-template"
+      ],
+      "unmapped_identities": []
+    },
+    {
+      "name": "synthetic-audit-archive",
+      "owner": "records-team",
+      "default_branch": "main",
+      "branches": [
+        "main",
+        "release/1.0"
+      ],
+      "archived": true,
+      "uses_lfs": false,
+      "hooks": [],
+      "pipeline_dependencies": [],
+      "unmapped_identities": []
+    },
+    {
+      "name": "synthetic-undiscovered-worker",
+      "owner": "integration-team",
+      "default_branch": "main",
+      "branches": null,
+      "archived": false,
+      "uses_lfs": null
+    }
+  ]
+}
+
