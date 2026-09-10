@@ -1,0 +1,16 @@
+{
+  "counts": {
+    "matched": 5,
+    "mismatched": 0,
+    "missing": 0,
+    "unexpected": 0
+  },
+  "destination_records": 5,
+  "destination_snapshot_sha256": "15629ec9b0229c3172656bf3a72e461d25e7147f5a8ba037cd943fdc0de7425a",
+  "findings": [],
+  "schema_version": 1,
+  "scope": "advertised refs/heads and refs/tags, including peeled tag targets",
+  "source_records": 5,
+  "source_snapshot_sha256": "15629ec9b0229c3172656bf3a72e461d25e7147f5a8ba037cd943fdc0de7425a",
+  "status": "match"
+}

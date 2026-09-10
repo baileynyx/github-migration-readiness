@@ -1,5 +1,11 @@
 # Validation
 
+## Visual rehearsal evidence
+
+September 10, 2026: `python tools/render_ref_demo.py --output-dir docs/assets/ref-demo` completed a fresh real-Git rehearsal and rendered its observed results into a four-frame, 30-second GIF and static summary. The intact copy matched 5 records; the changed copy reported 2 matched, 1 missing, 1 unexpected and 2 mismatched records. The source refs remained unchanged. Full captures, reports, execution evidence and source/asset hashes are retained under [docs/assets/ref-demo](docs/assets/ref-demo/transcript.md).
+
+All four rendered frames were visually inspected for readable text, correct counts and unclipped IDs. GIF inspection confirmed four frames, 30,000 ms total presentation duration and no repeat extension. This is a presentation of captured synthetic evidence; its timing is not measured execution duration. The existing 50-test suite passed after this presentation-only change. No additional unit tests or live provider operations were introduced. See the [reproduction guide](docs/ref-demo.md).
+
 ## Git ref verification
 
 September 10, 2026: local validation passed **50 tests**, comprising the previous 32 and 18 ref-verification tests. Coverage includes missing/unexpected/mismatched refs, annotated-tag objects and peeled targets, case-sensitive names, SHA-1/SHA-256 handling, malformed/duplicate/out-of-scope records, size limits, Markdown escaping, input/output gates and reproduction of the committed synthetic reports.

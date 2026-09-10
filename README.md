@@ -6,6 +6,14 @@ An offline Python assessment tool with an optional read-only Azure DevOps Cloud 
 
 ## Verify branches and tags
 
+### Watch the 30-second evidence walkthrough
+
+[Static summary](docs/assets/ref-demo/summary.png) · [Text version and full results](docs/assets/ref-demo/transcript.md) · [Recreate the visual](docs/ref-demo.md)
+
+![Actual synthetic Git rehearsal: the intact copy matches five records; the altered copy has one missing ref, one unexpected ref and two mismatched refs. A changed tag annotation is detected while its peeled target still matches.](docs/assets/ref-demo/demo.gif)
+
+This presentation uses a fresh local rehearsal's actual counts and object IDs. Its four frames play once over 30 seconds; the pacing does not represent execution time. Captures and generated reports are retained alongside the visual.
+
 Run a [local Git rehearsal](docs/ref-verification.md) that verifies an intact copy, then detects missing, unexpected and changed refs in a deliberately altered copy:
 
 ```shell

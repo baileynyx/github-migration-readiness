@@ -1,0 +1,5 @@
+4935be07ae9ef40ad0fefe84a1913bf0185b5658	refs/heads/destination-only
+ab4fdf8b1507bb869546fc04e93305d8a0b3d674	refs/heads/main
+ab4fdf8b1507bb869546fc04e93305d8a0b3d674	refs/tags/lightweight
+e24202c3148751f1bc8bbece4f1e476a9bc4fe30	refs/tags/v1.0.0
+ab4fdf8b1507bb869546fc04e93305d8a0b3d674	refs/tags/v1.0.0^{}
