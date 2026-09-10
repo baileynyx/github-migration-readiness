@@ -2,7 +2,17 @@
 
 An offline Python assessment tool with an optional read-only Azure DevOps Cloud collector for source-control migration planning. It highlights missing ownership, ref mismatches, identity gaps, and dependencies that need deliberate cutover work.
 
-**Scope:** normalized inventory assessment and optional collection of visible repository/default-branch/branch metadata from one Azure DevOps project. Examples and collector validation use synthetic responses. Nothing in this repository migrates repositories.
+**Scope:** normalized inventory assessment, offline comparison of captured Git branch/tag refs, and optional collection of visible repository/default-branch/branch metadata from one Azure DevOps project. Examples use synthetic data; the ref rehearsal runs real Git against disposable local repositories. Nothing in this repository migrates existing repositories.
+
+## Verify branches and tags
+
+Run a [local Git rehearsal](docs/ref-verification.md) that verifies an intact copy, then detects missing, unexpected and changed refs in a deliberately altered copy:
+
+```shell
+python rehearse_refs.py --output-dir reports/ref-rehearsal
+```
+
+Requires Git and Python 3.11+. No credentials or network access are needed. The rehearsal checks annotated-tag objects separately from their peeled targets, preserves both captures and generates JSON/Markdown evidence. See the [synthetic difference report](examples/ref-verification/refs.md). Matching refs is one migration acceptance check; default branch, LFS, permissions and platform metadata require separate verification.
 
 ## Collect, assess, report
 
@@ -45,7 +55,7 @@ Expected CLI output:
 {"blocker": 1, "ready": 1, "review": 3, "unknown": 1}
 ```
 
-Open `reports/migration-assessment/readiness.md` for findings and resolutions, or `readiness.json` in the same directory for structured results. The suite currently contains 32 tests. Its malformed-input test deliberately prints an assessment error while checking exit code 2; the final test result should be `OK`.
+Open `reports/migration-assessment/readiness.md` for findings and resolutions, or `readiness.json` in the same directory for structured results. The suite currently contains 50 tests. Its malformed-input test deliberately prints an assessment error while checking exit code 2; the final test result should be `OK`.
 
 To demonstrate the stricter inventory gate:
 

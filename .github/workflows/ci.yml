@@ -16,6 +16,12 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m unittest discover -s tests -v
+      # Real Git, disposable local repositories: assert both a match and the
+      # expected failure after branch/tag changes, including annotation-only drift.
+      - name: Rehearse Git ref verification
+        run: python rehearse_refs.py --output-dir reports/ref-rehearsal
+      - name: Show synthetic ref differences
+        run: cat reports/ref-rehearsal/broken/refs.md >> "$GITHUB_STEP_SUMMARY"
       # The sample deliberately contains blockers; generate it without failing CI.
       - run: python readiness.py examples/inventory.json --output-dir reports --fail-on never
       # Keep the full assessment separate from the original minimal example.

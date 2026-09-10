@@ -1,0 +1,45 @@
+{
+  "counts": {
+    "matched": 2,
+    "mismatched": 2,
+    "missing": 1,
+    "unexpected": 1
+  },
+  "destination_records": 5,
+  "destination_snapshot_sha256": "ed46af7b85341e621746147c821017f7aa2a609392967fa98e8994195cc9e8df",
+  "findings": [
+    {
+      "destination_oid": "4935be07ae9ef40ad0fefe84a1913bf0185b5658",
+      "kind": "branch",
+      "ref": "refs/heads/destination-only",
+      "source_oid": null,
+      "status": "unexpected"
+    },
+    {
+      "destination_oid": null,
+      "kind": "branch",
+      "ref": "refs/heads/feature",
+      "source_oid": "ab4fdf8b1507bb869546fc04e93305d8a0b3d674",
+      "status": "missing"
+    },
+    {
+      "destination_oid": "ab4fdf8b1507bb869546fc04e93305d8a0b3d674",
+      "kind": "branch",
+      "ref": "refs/heads/main",
+      "source_oid": "4935be07ae9ef40ad0fefe84a1913bf0185b5658",
+      "status": "mismatched"
+    },
+    {
+      "destination_oid": "e24202c3148751f1bc8bbece4f1e476a9bc4fe30",
+      "kind": "tag",
+      "ref": "refs/tags/v1.0.0",
+      "source_oid": "0a4ec19869007bc074f6602190df1c7ae4fb2e6b",
+      "status": "mismatched"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "advertised refs/heads and refs/tags, including peeled tag targets",
+  "source_records": 5,
+  "source_snapshot_sha256": "15629ec9b0229c3172656bf3a72e461d25e7147f5a8ba037cd943fdc0de7425a",
+  "status": "different"
+}
