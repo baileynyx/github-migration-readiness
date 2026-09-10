@@ -1,5 +1,26 @@
 # Validation
 
+## Versioned package preparation
+
+September 10, 2026: a version-1.0.0 candidate ZIP was built from an isolated local
+Git commit and validated outside its checkout on Linux/Python 3.12. All **50
+packaged product tests** passed. The extracted assessment, fixture collection,
+collected-inventory assessment, expected inventory/ref blocking exits and real
+Git rehearsal passed, with the source refs unchanged. The temporary extraction
+directory was removed. Rebuilding the same commit produced byte-identical ZIPs.
+All **6 packaging tests** also passed locally, including committed-input isolation,
+archive corruption, missing/changed members, unsafe paths and symlink rejection.
+
+The package's `BUILD.json` identifies its exact source commit and file hashes.
+The isolated local validation commit is not a release tag or the future merged
+commit. CI repeats the checks on Windows/PowerShell and Linux/Bash, with package
+integrity boundary tests in addition to the product suite. Confirm both jobs and
+compare their ZIP hashes for the exact commit before publication. The optional
+visual renderer is included for reproducibility but is not run in package CI.
+
+No GitHub Release has been published by this increment. See the
+[package quickstart](QUICKSTART.md) and [publication steps](docs/releasing.md).
+
 ## Windows and Linux CI
 
 The workflow matrix runs the same 50-test suite, standalone real-Git rehearsal and synthetic assessment/collector commands with Python 3.12 on `ubuntu-latest` (Bash) and `windows-latest` (PowerShell). Both jobs finish independently and upload separate platform-named report artifacts with 7-day retention. The Windows job additionally invokes the comparator directly, requires `$LASTEXITCODE` to equal 1 for the known-different fixture and checks that its Markdown report was written. Unexpected exit codes fail that job.
