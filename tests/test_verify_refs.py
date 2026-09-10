@@ -21,8 +21,9 @@ class RefVerificationTests(unittest.TestCase):
         folder = ROOT / 'examples/ref-verification'
         result = verify_refs.compare((folder / 'source.refs').read_bytes(),
                                      (folder / 'destination.refs').read_bytes())
-        self.assertEqual(result, json.loads((folder / 'refs.json').read_text()))
-        self.assertEqual(verify_refs.markdown(result), (folder / 'refs.md').read_text())
+        # Reports are UTF-8, independently of the Windows locale/default encoding.
+        self.assertEqual(result, json.loads((folder / 'refs.json').read_text(encoding='utf-8')))
+        self.assertEqual(verify_refs.markdown(result), (folder / 'refs.md').read_text(encoding='utf-8'))
 
     def test_matching_records_ignore_order_but_not_names(self):
         rows = [('refs/heads/main', 'a' * 40), ('refs/tags/light', 'b' * 40)]
@@ -121,7 +122,7 @@ class RefVerificationTests(unittest.TestCase):
                 args = [sys.executable, str(ROOT / 'verify_refs.py'), str(source), str(destination), '--output-dir', str(output)]
                 result = subprocess.run(args, capture_output=True, text=True)
                 self.assertEqual(result.returncode, code, result.stderr)
-                self.assertEqual(json.loads((output / 'refs.json').read_text())['status'], status)
+                self.assertEqual(json.loads((output / 'refs.json').read_text(encoding='utf-8'))['status'], status)
                 before = (output / 'refs.md').read_bytes()
                 self.assertEqual(subprocess.run(args, capture_output=True).returncode, 2)
                 self.assertEqual((output / 'refs.md').read_bytes(), before)
@@ -142,7 +143,7 @@ class RefVerificationTests(unittest.TestCase):
             result = rehearse_refs.run_demo(output)
             self.assertEqual(result['result'], 'passed')
             self.assertTrue(result['source_unchanged'])
-            broken = json.loads((output / 'broken/refs.json').read_text())
+            broken = json.loads((output / 'broken/refs.json').read_text(encoding='utf-8'))
             self.assertEqual(broken['counts'], {'matched': 2, 'missing': 1, 'unexpected': 1, 'mismatched': 2})
             tag = next(x for x in broken['findings'] if x['ref'] == 'refs/tags/v1.0.0')
             self.assertEqual(tag['status'], 'mismatched')
