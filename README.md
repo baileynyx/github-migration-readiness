@@ -42,7 +42,7 @@ Expected: 2 repositories collected; **1 blocker and 1 unknown** in the assessmen
 
 Start with the [six-repository scenario](docs/sample-assessment.md), inspect its [generated report](examples/migration-assessment/readiness.md), and follow the [migration runbook](docs/migration-runbook.md) from discovery through recovery. The scenario connects every repository's findings to accountable roles, next actions and acceptance evidence, including security requirements the CLI cannot inspect.
 
-Requires Git and Python 3.11 or later; CI uses Python 3.12. No third-party packages or credentials are needed. These commands work in PowerShell or Bash from a fresh checkout:
+Requires Git and Python 3.11 or later. CI runs Python 3.12 on Ubuntu with Bash and Windows with PowerShell, exercising the full test suite, real local Git rehearsal and synthetic collect/assess/report commands on each platform. No third-party packages or credentials are needed. Run these commands from a fresh checkout:
 
 ```shell
 # Clone the public assessment tool and enter the repository root.
@@ -64,6 +64,8 @@ Expected CLI output:
 ```
 
 Open `reports/migration-assessment/readiness.md` for findings and resolutions, or `readiness.json` in the same directory for structured results. The suite currently contains 50 tests. Its malformed-input test deliberately prints an assessment error while checking exit code 2; the final test result should be `OK`.
+
+Each CI job publishes its own captures and reports as `synthetic-readiness-report-ubuntu-latest` or `synthetic-readiness-report-windows-latest`, retained for 7 days. The Windows job also checks the documented `$LASTEXITCODE` behavior for an expected ref difference. See the [workflow runs](https://github.com/baileynyx/github-migration-readiness/actions/workflows/ci.yml) for results at a specific commit.
 
 To demonstrate the stricter inventory gate:
 

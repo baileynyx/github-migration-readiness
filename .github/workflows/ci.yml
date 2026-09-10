@@ -7,7 +7,20 @@ permissions:
   contents: read
 jobs:
   test:
-    runs-on: ubuntu-latest
+    name: Inventory and Git rehearsal (${{ matrix.os }})
+    strategy:
+      # Finish both platforms so one failure does not hide the other's evidence.
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            shell: bash
+          - os: windows-latest
+            shell: pwsh
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -20,8 +33,22 @@ jobs:
       # expected failure after branch/tag changes, including annotation-only drift.
       - name: Rehearse Git ref verification
         run: python rehearse_refs.py --output-dir reports/ref-rehearsal
-      - name: Show synthetic ref differences
+      - name: Show synthetic ref differences (Bash)
+        if: runner.os == 'Linux'
         run: cat reports/ref-rehearsal/broken/refs.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Show synthetic ref differences (PowerShell)
+        if: runner.os == 'Windows'
+        run: Get-Content reports/ref-rehearsal/broken/refs.md -Raw -Encoding utf8 | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+      - name: Check the PowerShell difference gate
+        if: runner.os == 'Windows'
+        # A detected difference must return 1 and still write its report. Capture
+        # that native exit code immediately; only this expected failure is accepted.
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          python verify_refs.py examples/ref-verification/source.refs examples/ref-verification/destination.refs --output-dir reports/powershell-ref-gate
+          if ($LASTEXITCODE -ne 1) { throw 'Expected ref differences to return exit code 1.' }
+          if (-not (Test-Path reports/powershell-ref-gate/refs.md)) { throw 'Expected difference report is missing.' }
+          exit 0
       # The sample deliberately contains blockers; generate it without failing CI.
       - run: python readiness.py examples/inventory.json --output-dir reports --fail-on never
       # Keep the full assessment separate from the original minimal example.
@@ -33,6 +60,9 @@ jobs:
       - run: python readiness.py reports/azure-devops/inventory.json --output-dir reports/azure-devops --fail-on never
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: synthetic-readiness-report
+          # Matrix jobs must upload distinct artifacts; each contains its own
+          # captures and execution evidence from that platform's actual rehearsal.
+          name: synthetic-readiness-report-${{ matrix.os }}
           path: reports/
+          if-no-files-found: error
           retention-days: 7

@@ -1,0 +1,3 @@
+# Ref captures are byte-level evidence: checkout must not change their SHA-256
+# hashes when a contributor or Windows runner enables core.autocrlf.
+*.refs -text

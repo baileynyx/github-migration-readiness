@@ -1,5 +1,15 @@
 # Validation
 
+## Windows and Linux CI
+
+The workflow matrix runs the same 50-test suite, standalone real-Git rehearsal and synthetic assessment/collector commands with Python 3.12 on `ubuntu-latest` (Bash) and `windows-latest` (PowerShell). Both jobs finish independently and upload separate platform-named report artifacts with 7-day retention. The Windows job additionally invokes the comparator directly, requires `$LASTEXITCODE` to equal 1 for the known-different fixture and checks that its Markdown report was written. Unexpected exit codes fail that job.
+
+Ref captures use `*.refs -text` in `.gitattributes` because their raw-byte hashes are part of the comparison evidence; automatic checkout line-ending conversion must not rewrite them. Tests read generated and committed reports explicitly as UTF-8 to avoid locale-dependent decoding. The comparator still accepts CRLF and UTF-8 BOM inputs, covered by the existing tests.
+
+September 10, 2026: the local Linux/Python 3.12 run passed all **50 tests** after these changes, including the real-Git rehearsal test. No additional unit tests were needed for this CI expansion.
+
+These are the configured CI checks. Verify both platform jobs for the exact commit in the [workflow history](https://github.com/baileynyx/github-migration-readiness/actions/workflows/ci.yml); configuration alone is not evidence of a passing hosted run. The optional Pillow visual renderer is outside this matrix, and Python versions other than 3.12 are not exercised by it.
+
 ## Visual rehearsal evidence
 
 September 10, 2026: `python tools/render_ref_demo.py --output-dir docs/assets/ref-demo` completed a fresh real-Git rehearsal and rendered its observed results into a four-frame, 30-second GIF and static summary. The intact copy matched 5 records; the changed copy reported 2 matched, 1 missing, 1 unexpected and 2 mismatched records. The source refs remained unchanged. Full captures, reports, execution evidence and source/asset hashes are retained under [docs/assets/ref-demo](docs/assets/ref-demo/transcript.md).
