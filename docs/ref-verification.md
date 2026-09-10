@@ -4,6 +4,8 @@
 
 ## Run the local rehearsal
 
+[Watch the 30-second visualization](../README.md#watch-the-30-second-evidence-walkthrough), read its [text version](assets/ref-demo/transcript.md), or follow the [image reproduction instructions](ref-demo.md).
+
 From the repository root, with Python 3.11+ and Git installed:
 
 ```shell

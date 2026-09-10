@@ -1,0 +1,2 @@
+# Optional GIF authoring only; normal assessment, comparison and tests need no packages.
+Pillow==12.3.0

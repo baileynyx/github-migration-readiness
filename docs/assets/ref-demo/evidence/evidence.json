@@ -1,0 +1,28 @@
+{
+  "result": "passed",
+  "scope": "disposable local Git repositories only",
+  "observed_at": "2026-09-10T13:05:54.695790+00:00",
+  "source_unchanged": true,
+  "observations": [
+    {
+      "scenario": "matching",
+      "exit_code": 0,
+      "counts": {
+        "matched": 5,
+        "mismatched": 0,
+        "missing": 0,
+        "unexpected": 0
+      }
+    },
+    {
+      "scenario": "broken",
+      "exit_code": 1,
+      "counts": {
+        "matched": 2,
+        "mismatched": 2,
+        "missing": 1,
+        "unexpected": 1
+      }
+    }
+  ]
+}

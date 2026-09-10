@@ -1,0 +1,31 @@
+{
+  "presentation_seconds": 30.0,
+  "frame_durations_ms": [
+    7000,
+    8000,
+    8000,
+    7000
+  ],
+  "observed_at": "2026-09-10T13:05:54.695790+00:00",
+  "python": "3.12.14",
+  "pillow": "12.3.0",
+  "git": "git version 2.51.1",
+  "source_sha256": {
+    "verify_refs.py": "93277663ca84bce7a371c5e40baec83d9fbbbaeb5cd942a978390a497e34d158",
+    "rehearse_refs.py": "15a6567c65eecd70ef0bf67932c3d71b09a7fdc6c57ff7443d99b6fd4a5890eb",
+    "tools/render_ref_demo.py": "1fde3106f8b1eb88198cd95f27c8f42d8db9f5c8ed72886024c5892fe13c8822"
+  },
+  "file_sha256": {
+    "demo.gif": "761c88fb4d8ddab6918b80f44209c4173420489d32cb963bf44ed4f3a48e16d1",
+    "evidence/broken/refs.json": "60cc8570656f79c01cacf2527034aa0ad59d9aba57814ce3e5f7a42c305b0382",
+    "evidence/broken/refs.md": "28b8dde656665aedc7c92982d53e96f1813002828f4d0177dd7ddc96cf6b9ed3",
+    "evidence/broken.refs": "ed46af7b85341e621746147c821017f7aa2a609392967fa98e8994195cc9e8df",
+    "evidence/evidence.json": "98e9f430463854afad2dafa08c5e8dd744b7f0fe81f41b4c700a4a8f25d34931",
+    "evidence/matching/refs.json": "42d2c5538857edc3b9cab4b658e6970b80b39b8c113f804e07cf07d7733e3b89",
+    "evidence/matching/refs.md": "701fb54b37a3a64113fa02d12e1cb487aae2079590f4fc87d9d1eb57324a37d5",
+    "evidence/matching.refs": "15629ec9b0229c3172656bf3a72e461d25e7147f5a8ba037cd943fdc0de7425a",
+    "evidence/source.refs": "15629ec9b0229c3172656bf3a72e461d25e7147f5a8ba037cd943fdc0de7425a",
+    "summary.png": "e349497efa8204d63d983d7dc4279ddabacf943aa01193969bbe151da812541c",
+    "transcript.md": "240fd563cba38edb14bf25cbf5b40f3fe32ee9a7f560a522e3e495f38462ee42"
+  }
+}
