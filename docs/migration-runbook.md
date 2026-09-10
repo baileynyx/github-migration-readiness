@@ -1,6 +1,6 @@
 # Migration runbook: discovery through recovery
 
-This is a proposed operating procedure for the [fictional six-repository assessment](sample-assessment.md). No live migration, customer outcome or recovery timing is claimed. The only executable walkthrough in this repository runs an offline assessment.
+This is a proposed operating procedure for the [fictional six-repository assessment](sample-assessment.md). No live migration, customer outcome or recovery timing is claimed. Executable walkthroughs cover offline assessment, synthetic collector replay and ref verification using disposable local Git repositories.
 
 ## 1. Discover and define the scope
 
@@ -27,6 +27,8 @@ Decide whether to retain Azure Pipelines with GitHub-hosted repositories or conv
 Start with the catalog pilot, then rehearse representative LFS and delivery-dependent repositories. Use migration credentials with the access required by the selected tool and record their revocation owner. Prevent the rehearsal destination from triggering production deployments or sending production integration events.
 
 Capture source refs at a recorded point, execute the chosen import, retain logs and investigate warnings. For Git data, compare branch and tag names and object IDs, including annotated-tag objects and peeled refs. Verify the destination default branch explicitly. If an intentional history transformation changes IDs, agree a different reconciliation method and document the mapping before acceptance.
+
+Use the [ref verification walkthrough](ref-verification.md) to compare captured advertisements and retain JSON/Markdown differences. Its [synthetic example](../examples/ref-verification/refs.md) demonstrates a missing branch, destination-only work, a changed branch and a changed tag annotation with the same peeled target. A ref match alone does not satisfy this stage's acceptance gate.
 
 Compare required metadata separately: reconcile exported/imported counts and inspect representative historical and recent pull requests, comments, attachments and work-item links as applicable to the preservation contract. Document unsupported or intentionally excluded data; matching Git refs cannot establish metadata completeness.
 
@@ -75,4 +77,3 @@ Keep one controlled record per repository linking:
 These are record requirements, not completed sign-offs. Public portfolio examples contain synthetic data only.
 
 [Sample assessment](sample-assessment.md) · [Project overview](../README.md)
-

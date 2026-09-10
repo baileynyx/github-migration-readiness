@@ -1,5 +1,13 @@
 # Validation
 
+## Git ref verification
+
+September 10, 2026: local validation passed **50 tests**, comprising the previous 32 and 18 ref-verification tests. Coverage includes missing/unexpected/mismatched refs, annotated-tag objects and peeled targets, case-sensitive names, SHA-1/SHA-256 handling, malformed/duplicate/out-of-scope records, size limits, Markdown escaping, input/output gates and reproduction of the committed synthetic reports.
+
+The standalone `rehearse_refs.py` run used actual local Git commands against two disposable bare repositories. The intact copy returned comparator exit **0** with **5 matched records**. After deliberate destination changes, comparison returned **1** with **2 matched, 1 missing, 1 unexpected and 2 mismatched records**. A changed annotated-tag message was detected while its peeled target still matched. The source advertisement remained unchanged; temporary repositories were removed. The rehearsal returned 0 because both expected outcomes were verified.
+
+CI runs the same rehearsal, publishes its difference report in the job summary and includes captures, JSON/Markdown reports and timestamped evidence in the existing synthetic-report artifact. Hosted status must be checked for the PR's actual commit. These local results do not claim a hosted run or a real provider migration. Matching supplied refs does not prove object availability, capture provenance or operational acceptance. See the [walkthrough and limits](docs/ref-verification.md).
+
 ## Read-only Azure DevOps collector
 
 The local suite passed **32 tests**: 15 existing assessment/sample tests and 17 collector tests using synthetic HTTP responses. New coverage includes complete refs pagination, later-page 403/404 handling, missing facts, malformed/duplicate evidence, authentication failure, repeated tokens/page limits, bounded retries, HTTP 200 pacing, Retry-After dates/budgets, fixed-host GET requests, redirect refusal, diagnostic redaction and output-directory protection.
