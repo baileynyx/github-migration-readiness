@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "blocker": 1,
+    "unknown": 1,
+    "review": 0,
+    "ready": 0
+  },
+  "repositories": [
+    {
+      "name": "synthetic-catalog-api",
+      "status": "unknown",
+      "findings": [
+        {
+          "severity": "unknown",
+          "field": "owner",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify owner."
+        },
+        {
+          "severity": "unknown",
+          "field": "archived",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify archived."
+        },
+        {
+          "severity": "unknown",
+          "field": "uses_lfs",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify uses_lfs."
+        },
+        {
+          "severity": "unknown",
+          "field": "hooks",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify hooks."
+        },
+        {
+          "severity": "unknown",
+          "field": "pipeline_dependencies",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify pipeline_dependencies."
+        },
+        {
+          "severity": "unknown",
+          "field": "unmapped_identities",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify unmapped_identities."
+        }
+      ]
+    },
+    {
+      "name": "synthetic-legacy-worker",
+      "status": "blocker",
+      "findings": [
+        {
+          "severity": "unknown",
+          "field": "owner",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify owner."
+        },
+        {
+          "severity": "unknown",
+          "field": "archived",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify archived."
+        },
+        {
+          "severity": "unknown",
+          "field": "uses_lfs",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify uses_lfs."
+        },
+        {
+          "severity": "unknown",
+          "field": "hooks",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify hooks."
+        },
+        {
+          "severity": "unknown",
+          "field": "pipeline_dependencies",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify pipeline_dependencies."
+        },
+        {
+          "severity": "unknown",
+          "field": "unmapped_identities",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify unmapped_identities."
+        },
+        {
+          "severity": "blocker",
+          "field": "branches",
+          "message": "Default branch is absent from the ref inventory.",
+          "action": "Reconcile the default branch and exported refs."
+        }
+      ]
+    }
+  ]
+}

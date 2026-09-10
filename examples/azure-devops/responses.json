@@ -1,0 +1,107 @@
+{
+  "organization": "synthetic-org",
+  "project": "migration-lab",
+  "responses": [
+    {
+      "request": {
+        "resource": "repositories",
+        "query": {
+          "api-version": "7.1",
+          "includeHidden": "true"
+        }
+      },
+      "status": 200,
+      "body": {
+        "count": 2,
+        "value": [
+          {
+            "id": "11111111-1111-4111-8111-111111111111",
+            "name": "synthetic-catalog-api",
+            "defaultBranch": "refs/heads/main",
+            "isDisabled": false
+          },
+          {
+            "id": "22222222-2222-4222-8222-222222222222",
+            "name": "synthetic-legacy-worker",
+            "defaultBranch": "refs/heads/master"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "resource": "repositories/11111111-1111-4111-8111-111111111111/refs",
+        "query": {
+          "api-version": "7.1",
+          "filter": "heads/",
+          "$top": "1000"
+        }
+      },
+      "status": 429,
+      "headers": {
+        "Retry-After": "2"
+      }
+    },
+    {
+      "request": {
+        "resource": "repositories/11111111-1111-4111-8111-111111111111/refs",
+        "query": {
+          "api-version": "7.1",
+          "filter": "heads/",
+          "$top": "1000"
+        }
+      },
+      "status": 200,
+      "headers": {
+        "x-ms-continuationtoken": "synthetic/next+page="
+      },
+      "body": {
+        "count": 1,
+        "value": [
+          {
+            "name": "refs/heads/main"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "resource": "repositories/11111111-1111-4111-8111-111111111111/refs",
+        "query": {
+          "api-version": "7.1",
+          "filter": "heads/",
+          "$top": "1000",
+          "continuationToken": "synthetic/next+page="
+        }
+      },
+      "status": 200,
+      "body": {
+        "count": 1,
+        "value": [
+          {
+            "name": "refs/heads/release/1.0"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "resource": "repositories/22222222-2222-4222-8222-222222222222/refs",
+        "query": {
+          "api-version": "7.1",
+          "filter": "heads/",
+          "$top": "1000"
+        }
+      },
+      "status": 200,
+      "body": {
+        "count": 1,
+        "value": [
+          {
+            "name": "refs/heads/main"
+          }
+        ]
+      }
+    }
+  ]
+}

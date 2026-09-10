@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "repositories": [
+    {
+      "name": "synthetic-catalog-api",
+      "owner": null,
+      "default_branch": "main",
+      "branches": [
+        "main",
+        "release/1.0"
+      ],
+      "archived": null,
+      "uses_lfs": null,
+      "hooks": null,
+      "pipeline_dependencies": null,
+      "unmapped_identities": null
+    },
+    {
+      "name": "synthetic-legacy-worker",
+      "owner": null,
+      "default_branch": "master",
+      "branches": [
+        "main"
+      ],
+      "archived": null,
+      "uses_lfs": null,
+      "hooks": null,
+      "pipeline_dependencies": null,
+      "unmapped_identities": null
+    }
+  ]
+}

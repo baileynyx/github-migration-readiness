@@ -1,5 +1,13 @@
 # Validation
 
+## Read-only Azure DevOps collector
+
+The local suite passed **32 tests**: 15 existing assessment/sample tests and 17 collector tests using synthetic HTTP responses. New coverage includes complete refs pagination, later-page 403/404 handling, missing facts, malformed/duplicate evidence, authentication failure, repeated tokens/page limits, bounded retries, HTTP 200 pacing, Retry-After dates/budgets, fixed-host GET requests, redirect refusal, diagnostic redaction and output-directory protection.
+
+The public fixture CLI collected two fictional repositories and generated schema-version-1 inventory. Passing that inventory into `readiness.py` produced **1 blocker, 1 unknown, 0 review, 0 ready**. Tests regenerate the committed inventory plus JSON/Markdown reports and compare content. The workflow now generates this evidence alongside the earlier examples and uploads it in the existing report artifact.
+
+No live Azure DevOps organization, PAT, project or repository was accessed. Authentication and network behavior were exercised with mocked transports; hosted CI should be verified for the exact PR commit. The collector cannot establish full project visibility, accountable owners, archive intent, LFS, hooks, pipeline dependencies or target identity mappings from its two endpoint families.
+
 ## Six-repository sample assessment
 
 September 9, 2026: local validation with Python 3.12.14 passed all **15 tests** using `python -m unittest discover -s tests -v`. The original 12 assessment tests remain; three new tests check the sample's six outcomes and discovery gaps, reproduction of both committed report formats through the CLI, and blocking exit codes with reports still written.

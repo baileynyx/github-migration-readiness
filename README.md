@@ -1,8 +1,24 @@
 # GitHub migration readiness
 
-An offline Python assessment tool for source-control migration planning. It highlights missing ownership, ref mismatches, identity gaps, and dependencies that need deliberate cutover work.
+An offline Python assessment tool with an optional read-only Azure DevOps Cloud collector for source-control migration planning. It highlights missing ownership, ref mismatches, identity gaps, and dependencies that need deliberate cutover work.
 
-**Scope:** normalized inventory assessment, using synthetic examples. It does not collect provider data or migrate repositories.
+**Scope:** normalized inventory assessment and optional collection of visible repository/default-branch/branch metadata from one Azure DevOps project. Examples and collector validation use synthetic responses. Nothing in this repository migrates repositories.
+
+## Collect, assess, report
+
+The [Azure DevOps collector walkthrough](docs/azure-devops-collector.md) covers authenticated read-only discovery, pagination, bounded retries, permission errors and explicit unknowns. Try the complete flow without credentials:
+
+```shell
+# From the repository root, replay synthetic HTTP responses into a NEW directory.
+# Fixture mode performs no network requests and does not read credentials.
+python collect_azure_devops.py --fixture examples/azure-devops/responses.json --output-dir reports/azure-devops-demo
+
+# Generate a report from the collector's normalized output. The fictional
+# default-branch mismatch is expected, so this demonstration permits findings.
+python readiness.py reports/azure-devops-demo/inventory.json --output-dir reports/azure-devops-demo --fail-on never
+```
+
+Expected: 2 repositories collected; **1 blocker and 1 unknown** in the assessment. Inspect the [generated report](examples/azure-devops/readiness.md). Choose a different output directory for another collection; existing directories are refused. The live mode has not been exercised against a real organization. Owner, archive intent, LFS, hooks, pipeline dependencies and identity mappings remain unknown until separately verified.
 
 ## Walk through a complete sample assessment
 
@@ -29,7 +45,7 @@ Expected CLI output:
 {"blocker": 1, "ready": 1, "review": 3, "unknown": 1}
 ```
 
-Open `reports/migration-assessment/readiness.md` for findings and resolutions, or `readiness.json` in the same directory for structured results. The suite currently contains 15 tests. Its malformed-input test deliberately prints an assessment error while checking exit code 2; the final test result should be `OK`.
+Open `reports/migration-assessment/readiness.md` for findings and resolutions, or `readiness.json` in the same directory for structured results. The suite currently contains 32 tests. Its malformed-input test deliberately prints an assessment error while checking exit code 2; the final test result should be `OK`.
 
 To demonstrate the stricter inventory gate:
 
@@ -76,7 +92,7 @@ Except for `name`, missing/null values are unknown, never a pass. Explicit empty
 
 ## Why this design
 
-Normalization separates provider collection from assessment. Deterministic reports are easy to diff in review. No network client or credentials are needed. Field-level resolutions explain the next action rather than reduce a migration to a misleading percentage score.
+Normalization separates provider collection from assessment. Deterministic inventory/report content is easy to diff in review; collection timestamps are recorded separately. Assessment and synthetic replay require no network client or credentials. Field-level resolutions explain the next action rather than reduce a migration to a misleading percentage score.
 
 ## Rehearsal and cutover
 
@@ -91,4 +107,4 @@ The [full runbook](docs/migration-runbook.md) assigns responsibilities and evide
 
 ## Evidence and limits
 
-See `VALIDATION.md` for executed checks. There are no live provider collectors, migrations, employer assets, or invented operational metrics. Next useful extension: a read-only Azure DevOps collector with pagination, retry handling, and explicit unknowns for unavailable fields.
+See [VALIDATION.md](VALIDATION.md) for executed checks. The read-only collector is implemented and tested with simulated API replies; a live organization collection remains unvalidated. There are no migrations, employer assets or invented operational metrics. Future evidence should include an authorized live rehearsal and reconciliation of visible repository scope before expanding collection to additional fields.
