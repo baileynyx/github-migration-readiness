@@ -6,16 +6,19 @@ An offline Python assessment tool with an optional read-only Azure DevOps Cloud 
 
 ## Versioned package
 
-Version **1.0.0** is being prepared; no published release is claimed here. The
-Windows and Linux CI jobs build a ZIP and checksum, then run the extracted tools
-and all 50 product tests outside the checkout. Candidate downloads are retained
-for 14 days as `migration-package-ubuntu-latest` and
-`migration-package-windows-latest` in the [CI runs](https://github.com/baileynyx/github-migration-readiness/actions/workflows/ci.yml).
+**[Download v1.0.0](https://github.com/baileynyx/github-migration-readiness/releases/download/v1.0.0/github-migration-readiness-1.0.0.zip)** ·
+[SHA-256 checksum](https://github.com/baileynyx/github-migration-readiness/releases/download/v1.0.0/github-migration-readiness-1.0.0.zip.sha256) ·
+[Release page](https://github.com/baileynyx/github-migration-readiness/releases/tag/v1.0.0)
+
+Requires Python 3.11+ and Git. Windows and Linux produced identical release ZIPs;
+each extracted package passed all 50 product tests and the example CLI scenarios.
+[Verified build](https://github.com/baileynyx/github-migration-readiness/actions/runs/34513354414) ·
+[Packaged validation evidence](https://github.com/baileynyx/github-migration-readiness/releases/download/v1.0.0/package-check.json).
 
 [Package quickstart](QUICKSTART.md) · [Release notes](RELEASE_NOTES.md) ·
-[Build and publication guide](docs/releasing.md). The quickstart covers checksum
-verification and commands from the extracted folder. A public release download
-link will be added after publication.
+[Build and publication guide](docs/releasing.md). Verify the checksum before
+extracting, then follow the quickstart from the extracted folder. Checksums
+establish integrity, not signed provenance.
 
 ## Verify branches and tags
 

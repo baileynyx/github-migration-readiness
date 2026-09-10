@@ -1,5 +1,25 @@
 # Validation
 
+## Published version 1.0.0
+
+September 10, 2026: [v1.0.0](https://github.com/baileynyx/github-migration-readiness/releases/tag/v1.0.0) was published, and its
+tag resolves to `374664db050a92ce7b454d987e373b2821d4e080`. The
+[main-branch CI run](https://github.com/baileynyx/github-migration-readiness/actions/runs/34513354414)
+passed on Windows and Linux: 50 source tests, 6 packaging tests, all 50 product
+tests again from the extracted ZIP, and the seven package CLI scenarios.
+
+All three public assets were downloaded successfully. Their sizes and SHA-256
+hashes matched GitHub's asset metadata. The ZIP matched the hash recorded by both
+platform jobs:
+
+`56e8755bde583291e9d663e90a750248242538d2d199da2a2d5ebf7b95b8dc7e`
+
+The sidecar checksum and published Windows validation evidence agree with that
+ZIP and source commit. All 48 payload file hashes in `BUILD.json` were verified.
+This is download integrity and recorded execution evidence, not a signature or
+a new live-provider validation. The release ZIP preserves its tagged preparation
+snapshot; publication status and download links are updated in current docs.
+
 ## Versioned package preparation
 
 September 10, 2026: a version-1.0.0 candidate ZIP was built from an isolated local
