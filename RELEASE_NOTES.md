@@ -1,7 +1,9 @@
-# Version 1.0.0 — release candidate
+# Version 1.0.0
 
-This version is being prepared for the first published release. This document
-does not claim that a GitHub Release or tag already exists.
+[Published September 10, 2026](https://github.com/baileynyx/github-migration-readiness/releases/tag/v1.0.0) from
+commit `374664db050a92ce7b454d987e373b2821d4e080`.
+The attached ZIP and checksum match the Windows and Linux packages verified in
+[CI run 34513354414](https://github.com/baileynyx/github-migration-readiness/actions/runs/34513354414).
 
 ## Included
 

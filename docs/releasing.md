@@ -2,8 +2,9 @@
 
 ## Prepare
 
-The repository currently prepares version 1.0.0. A passing package CI artifact is
-a release candidate, not a published GitHub Release. Start with
+[Version 1.0.0 is published](https://github.com/baileynyx/github-migration-readiness/releases/tag/v1.0.0). Use its attached
+assets for that release. Builds from newer commits are candidates for future
+work; do not replace the published assets or move the existing tag. Start with
 [QUICKSTART.md](../QUICKSTART.md) to try the downloaded package.
 
 From a committed checkout, run:
