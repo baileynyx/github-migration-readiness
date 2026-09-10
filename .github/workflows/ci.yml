@@ -29,6 +29,26 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m unittest discover -s tests -v
+      - name: Test package integrity boundaries
+        run: python -m unittest discover -s tools -p test_release.py -v
+      - name: Build the committed versioned ZIP twice
+        run: |
+          python build_release.py --output-dir dist
+          python build_release.py --output-dir dist-repeat
+          python -c "from pathlib import Path; a=Path('dist/github-migration-readiness-1.0.0.zip').read_bytes(); b=Path('dist-repeat/github-migration-readiness-1.0.0.zip').read_bytes(); assert a == b, 'Repeated package builds differ'"
+      - name: Run the product from the extracted ZIP
+        run: python check_package.py dist/github-migration-readiness-1.0.0.zip --output-dir reports/package
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          # Each OS uploads the exact bytes it tested, plus the source commit,
+          # archive hash and observed command results. No release is published.
+          name: migration-package-${{ matrix.os }}
+          path: |
+            dist/*.zip
+            dist/*.sha256
+            reports/package/package-check.json
+          if-no-files-found: error
+          retention-days: 14
       # Real Git, disposable local repositories: assert both a match and the
       # expected failure after branch/tag changes, including annotation-only drift.
       - name: Rehearse Git ref verification

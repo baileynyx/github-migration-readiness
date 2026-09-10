@@ -4,6 +4,19 @@ An offline Python assessment tool with an optional read-only Azure DevOps Cloud 
 
 **Scope:** normalized inventory assessment, offline comparison of captured Git branch/tag refs, and optional collection of visible repository/default-branch/branch metadata from one Azure DevOps project. Examples use synthetic data; the ref rehearsal runs real Git against disposable local repositories. Nothing in this repository migrates existing repositories.
 
+## Versioned package
+
+Version **1.0.0** is being prepared; no published release is claimed here. The
+Windows and Linux CI jobs build a ZIP and checksum, then run the extracted tools
+and all 50 product tests outside the checkout. Candidate downloads are retained
+for 14 days as `migration-package-ubuntu-latest` and
+`migration-package-windows-latest` in the [CI runs](https://github.com/baileynyx/github-migration-readiness/actions/workflows/ci.yml).
+
+[Package quickstart](QUICKSTART.md) · [Release notes](RELEASE_NOTES.md) ·
+[Build and publication guide](docs/releasing.md). The quickstart covers checksum
+verification and commands from the extracted folder. A public release download
+link will be added after publication.
+
 ## Verify branches and tags
 
 ### Watch the 30-second evidence walkthrough
