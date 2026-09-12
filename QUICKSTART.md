@@ -40,7 +40,6 @@ Run these commands from the extracted folder in PowerShell or Bash:
 
 ```shell
 python readiness.py examples/migration-assessment/inventory.json --output-dir reports/assessment --fail-on never
-python classify_repositories.py examples/pre-migration/inventory.json --output-dir reports/pre-migration --fail-on never
 python collect_azure_devops.py --fixture examples/azure-devops/responses.json --output-dir reports/collector
 python readiness.py reports/collector/inventory.json --output-dir reports/collector --fail-on never
 python rehearse_refs.py --output-dir reports/ref-rehearsal
@@ -48,15 +47,25 @@ python -m unittest discover -s tests -v
 ```
 
 Expected: the six-repository assessment reports 1 blocker, 1 unknown, 3 review and
-1 ready; pre-migration classification reports 1 standard, 1 review and 2
-transformation paths; fixture collection produces 2 repositories whose assessment
-has 1 blocker and 1 unknown. The Git rehearsal verifies 5 intact ref records, then detects 1
+1 ready; fixture collection produces 2 repositories whose assessment has 1 blocker
+and 1 unknown. The Git rehearsal verifies 5 intact ref records, then detects 1
 missing, 1 unexpected and 2 changed records in the altered copy. The product suite
 contains 50 tests. Collection and rehearsal require new output directories.
 
 Inspect the Markdown and JSON files under `reports`. These examples use no
 credentials or provider requests. See [README.md](README.md) for the tool's scope
 and [the runbook](docs/migration-runbook.md) for checks beyond ref equality.
+
+## Try the 1.1.0 candidate classifier
+
+This command is available from the current source checkout and the 1.1.0
+candidate package. It is not part of the published 1.0.0 ZIP described above.
+
+```shell
+python classify_repositories.py examples/pre-migration/inventory.json --output-dir reports/pre-migration --fail-on never
+```
+
+Expected: 1 standard, 1 review-required and 2 transformation-required paths.
 
 ## Interpret an expected failure
 
