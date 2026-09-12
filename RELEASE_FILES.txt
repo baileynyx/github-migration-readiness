@@ -6,6 +6,7 @@ RELEASE_NOTES.md
 VALIDATION.md
 VERSION
 collect_azure_devops.py
+classify_repositories.py
 docs/assets/ref-demo/demo.gif
 docs/assets/ref-demo/evidence/broken.refs
 docs/assets/ref-demo/evidence/broken/refs.json
@@ -20,6 +21,7 @@ docs/assets/ref-demo/summary.png
 docs/assets/ref-demo/transcript.md
 docs/azure-devops-collector.md
 docs/migration-runbook.md
+docs/pre-migration-classification.md
 docs/ref-demo.md
 docs/ref-verification.md
 docs/releasing.md
@@ -32,6 +34,9 @@ examples/inventory.json
 examples/migration-assessment/inventory.json
 examples/migration-assessment/readiness.json
 examples/migration-assessment/readiness.md
+examples/pre-migration/classification.json
+examples/pre-migration/classification.md
+examples/pre-migration/inventory.json
 examples/readiness.json
 examples/readiness.md
 examples/ref-verification/destination.refs
@@ -41,6 +46,7 @@ examples/ref-verification/source.refs
 readiness.py
 rehearse_refs.py
 tests/test_collector.py
+tests/test_classify_repositories.py
 tests/test_readiness.py
 tests/test_sample_assessment.py
 tests/test_verify_refs.py
