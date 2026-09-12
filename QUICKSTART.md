@@ -1,7 +1,7 @@
 # Run the packaged migration tool
 
 Requires Python 3.11 or later and Git on PATH. Package CI uses Python 3.12 on
-Windows and Linux. The four command-line tools use only the Python standard
+Windows and Linux. The five command-line tools use only the Python standard
 library; optional visual regeneration requires the separate Pillow dependency.
 
 Download the versioned ZIP and its matching `.zip.sha256` file from the release
@@ -40,6 +40,7 @@ Run these commands from the extracted folder in PowerShell or Bash:
 
 ```shell
 python readiness.py examples/migration-assessment/inventory.json --output-dir reports/assessment --fail-on never
+python classify_repositories.py examples/pre-migration/inventory.json --output-dir reports/pre-migration --fail-on never
 python collect_azure_devops.py --fixture examples/azure-devops/responses.json --output-dir reports/collector
 python readiness.py reports/collector/inventory.json --output-dir reports/collector --fail-on never
 python rehearse_refs.py --output-dir reports/ref-rehearsal
@@ -47,8 +48,9 @@ python -m unittest discover -s tests -v
 ```
 
 Expected: the six-repository assessment reports 1 blocker, 1 unknown, 3 review and
-1 ready; fixture collection produces 2 repositories whose assessment has 1 blocker
-and 1 unknown. The Git rehearsal verifies 5 intact ref records, then detects 1
+1 ready; pre-migration classification reports 1 standard, 1 review and 2
+transformation paths; fixture collection produces 2 repositories whose assessment
+has 1 blocker and 1 unknown. The Git rehearsal verifies 5 intact ref records, then detects 1
 missing, 1 unexpected and 2 changed records in the altered copy. The product suite
 contains 50 tests. Collection and rehearsal require new output directories.
 
