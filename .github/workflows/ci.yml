@@ -74,6 +74,9 @@ jobs:
       # Keep the full assessment separate from the original minimal example.
       # Both deliberately contain findings; the tests verify blocking exit codes.
       - run: python readiness.py examples/migration-assessment/inventory.json --output-dir reports/migration-assessment --fail-on never
+      # Classify synthetic repositories before scheduling. The example's review
+      # and transformation paths are expected planning results, not CI failures.
+      - run: python classify_repositories.py examples/pre-migration/inventory.json --output-dir reports/pre-migration --fail-on never
       # Exercise collect -> assess -> report using synthetic HTTP replies only.
       # The collector uses a fresh folder and the fixture needs no account/PAT.
       - run: python collect_azure_devops.py --fixture examples/azure-devops/responses.json --output-dir reports/azure-devops
