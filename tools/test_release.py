@@ -1,4 +1,4 @@
-"""Test packaging integrity boundaries independently of the 50 product tests."""
+"""Test packaging integrity boundaries independently of the 63 product tests."""
 import hashlib
 import io
 import json

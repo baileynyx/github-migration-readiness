@@ -1,5 +1,19 @@
 # Validation
 
+## Version 1.1.0 candidate
+
+September 12, 2026: the local Python 3.12 suite passed **63 tests**, including
+13 classifier tests. The committed synthetic classifier report reproduced from
+its input and disclosed policy with **1 standard, 1 review required and 2
+transformation required** results. No provider, employer, or live repository
+data was used.
+
+The classifier adds scheduling evidence; it does not inspect repositories,
+estimate migration duration or certify migration success. Hosted Windows/Linux
+CI must pass for the exact pull-request commit before a 1.1.0 release is
+published. The local committed-source package was also built and validated in a
+fresh directory: all 63 packaged tests and eight CLI scenarios passed.
+
 ## Published version 1.0.0
 
 September 10, 2026: [v1.0.0](https://github.com/baileynyx/github-migration-readiness/releases/tag/v1.0.0) was published, and its

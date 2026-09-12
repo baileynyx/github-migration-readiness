@@ -1,7 +1,7 @@
 # Run the packaged migration tool
 
 Requires Python 3.11 or later and Git on PATH. Package CI uses Python 3.12 on
-Windows and Linux. The four command-line tools use only the Python standard
+Windows and Linux. The five command-line tools use only the Python standard
 library; optional visual regeneration requires the separate Pillow dependency.
 
 Download the versioned ZIP and its matching `.zip.sha256` file from the release
@@ -55,6 +55,17 @@ contains 50 tests. Collection and rehearsal require new output directories.
 Inspect the Markdown and JSON files under `reports`. These examples use no
 credentials or provider requests. See [README.md](README.md) for the tool's scope
 and [the runbook](docs/migration-runbook.md) for checks beyond ref equality.
+
+## Try the 1.1.0 candidate classifier
+
+This command is available from the current source checkout and the 1.1.0
+candidate package. It is not part of the published 1.0.0 ZIP described above.
+
+```shell
+python classify_repositories.py examples/pre-migration/inventory.json --output-dir reports/pre-migration --fail-on never
+```
+
+Expected: 1 standard, 1 review-required and 2 transformation-required paths.
 
 ## Interpret an expected failure
 

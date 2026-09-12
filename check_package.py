@@ -77,12 +77,18 @@ def check(archive, output):
 
         _, tests = run('packaged test suite', ['-m', 'unittest', 'discover', '-s', 'tests', '-v'])
         match = re.search(r'Ran (\d+) tests', tests)
-        if not match or int(match[1]) != 50 or not re.search(r'^OK\s*$', tests, re.MULTILINE):
-            raise ValueError('The package must contain and pass all 50 product tests.')
+        if not match or int(match[1]) != 63 or not re.search(r'^OK\s*$', tests, re.MULTILINE):
+            raise ValueError('The package must contain and pass all 63 product tests.')
         counts, _ = run('six-repository assessment', ['readiness.py', 'examples/migration-assessment/inventory.json',
                         '--output-dir', 'reports/assessment', '--fail-on', 'never'])
         if json.loads(counts) != {'blocker': 1, 'unknown': 1, 'review': 3, 'ready': 1}:
             raise ValueError('Packaged assessment produced unexpected findings.')
+        counts, _ = run('pre-migration classification', ['classify_repositories.py',
+                        'examples/pre-migration/inventory.json', '--output-dir',
+                        'reports/pre-migration', '--fail-on', 'never'])
+        if json.loads(counts) != {'transformation_required': 2,
+                                  'review_required': 1, 'standard': 1}:
+            raise ValueError('Packaged pre-migration classification produced unexpected findings.')
         run('inventory blocking gate', ['readiness.py', 'examples/migration-assessment/inventory.json',
             '--output-dir', 'reports/assessment', '--fail-on', 'unready'], expected=1)
         result, _ = run('fixture collection', ['collect_azure_devops.py', '--fixture',
@@ -104,18 +110,18 @@ def check(archive, output):
         evidence = {'result': 'passed', 'version': inventory['version'],
                     'source_commit': inventory['source_commit'], 'archive_sha256': checksum,
                     'platform': sys.platform, 'python': sys.version.split()[0],
-                    'packaged_tests_passed': 50, 'ran_outside_checkout': True,
+                    'packaged_tests_passed': 63, 'ran_outside_checkout': True,
                     'observations': observations, 'git_rehearsal': rehearsal}
     evidence['temporary_directory_removed'] = not root.parent.exists()
     (output / 'package-check.json').write_text(json.dumps(evidence, indent=2) + '\n', encoding='utf-8')
     return evidence
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('archive', type=Path)
     parser.add_argument('--output-dir', required=True, type=Path)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     try:
         print(json.dumps(check(args.archive.resolve(), args.output_dir), indent=2))
         return 0

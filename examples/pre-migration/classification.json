@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "review_size_mb": 2048,
+    "transformation_size_mb": 5120,
+    "review_branch_count": 50,
+    "review_binary_mb": 100,
+    "transformation_binary_mb": 1024
+  },
+  "summary": {
+    "transformation_required": 2,
+    "review_required": 1,
+    "standard": 1
+  },
+  "repositories": [
+    {
+      "name": "synthetic-catalog-api",
+      "status": "standard",
+      "reasons": []
+    },
+    {
+      "name": "synthetic-legacy-tfvc",
+      "status": "transformation_required",
+      "reasons": [
+        {
+          "severity": "transformation",
+          "field": "source_kind",
+          "message": "TFVC requires a conversion path.",
+          "action": "Plan and rehearse history transformation before the migration window."
+        },
+        {
+          "severity": "transformation",
+          "field": "history_rewrite_required",
+          "message": "The repository requires an intentional history rewrite.",
+          "action": "Define the rewrite mapping and reconciliation acceptance evidence."
+        },
+        {
+          "severity": "review",
+          "field": "binary_mb",
+          "message": "Binary content is 240 MiB; policy review threshold is 100 MiB.",
+          "action": "Review transfer method, timing and validation before scheduling."
+        }
+      ]
+    },
+    {
+      "name": "synthetic-media-history",
+      "status": "transformation_required",
+      "reasons": [
+        {
+          "severity": "transformation",
+          "field": "size_mb",
+          "message": "Repository size is 6,840 MiB; policy transformation threshold is 5,120 MiB.",
+          "action": "Rehearse a dedicated transformation path and allocate appropriate compute and network proximity."
+        },
+        {
+          "severity": "transformation",
+          "field": "binary_mb",
+          "message": "Binary content is 1,780 MiB; policy transformation threshold is 1,024 MiB.",
+          "action": "Rehearse a dedicated transformation path and allocate appropriate compute and network proximity."
+        },
+        {
+          "severity": "review",
+          "field": "branch_count",
+          "message": "Branch count is 82; policy review threshold is 50.",
+          "action": "Confirm branch scope, owners and post-transfer ref reconciliation."
+        },
+        {
+          "severity": "review",
+          "field": "uses_lfs",
+          "message": "Git LFS objects need a separate transfer and availability check.",
+          "action": "Inventory, transfer and verify LFS objects from a fresh clone."
+        }
+      ]
+    },
+    {
+      "name": "synthetic-undiscovered-worker",
+      "status": "review_required",
+      "reasons": [
+        {
+          "severity": "review",
+          "field": "size_mb",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify size_mb before scheduling."
+        },
+        {
+          "severity": "review",
+          "field": "branch_count",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify branch_count before scheduling."
+        },
+        {
+          "severity": "review",
+          "field": "binary_mb",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify binary_mb before scheduling."
+        },
+        {
+          "severity": "review",
+          "field": "uses_lfs",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify uses_lfs before scheduling."
+        },
+        {
+          "severity": "review",
+          "field": "history_rewrite_required",
+          "message": "Evidence was not supplied.",
+          "action": "Collect and verify history_rewrite_required before scheduling."
+        }
+      ]
+    }
+  ]
+}

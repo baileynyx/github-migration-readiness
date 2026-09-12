@@ -4,6 +4,22 @@ An offline Python assessment tool with an optional read-only Azure DevOps Cloud 
 
 **Scope:** normalized inventory assessment, offline comparison of captured Git branch/tag refs, and optional collection of visible repository/default-branch/branch metadata from one Azure DevOps project. Examples use synthetic data; the ref rehearsal runs real Git against disposable local repositories. Nothing in this repository migrates existing repositories.
 
+## Classify risk before the migration calendar
+
+The [pre-migration classifier](docs/pre-migration-classification.md) turns
+supplied measurements into three explicit scheduling paths: `standard`,
+`review_required`, and `transformation_required`. It surfaces TFVC conversion,
+repository size, binary volume, branch complexity, LFS and intentional history
+rewrites before cutover work begins.
+
+```shell
+python classify_repositories.py examples/pre-migration/inventory.json --output-dir reports/pre-migration --fail-on never
+```
+
+Expected: **1 standard, 1 review required, 2 transformation required**. The
+thresholds live in the input policy and are repeated in the output; they are
+demonstration values that must be reviewed for a real environment.
+
 ## Versioned package
 
 **[Download v1.0.0](https://github.com/baileynyx/github-migration-readiness/releases/download/v1.0.0/github-migration-readiness-1.0.0.zip)** ·
@@ -79,7 +95,7 @@ Expected CLI output:
 {"blocker": 1, "ready": 1, "review": 3, "unknown": 1}
 ```
 
-Open `reports/migration-assessment/readiness.md` for findings and resolutions, or `readiness.json` in the same directory for structured results. The suite currently contains 50 tests. Its malformed-input test deliberately prints an assessment error while checking exit code 2; the final test result should be `OK`.
+Open `reports/migration-assessment/readiness.md` for findings and resolutions, or `readiness.json` in the same directory for structured results. The malformed-input tests deliberately print controlled errors while checking exit code 2; the final test result should be `OK`.
 
 Each CI job publishes its own captures and reports as `synthetic-readiness-report-ubuntu-latest` or `synthetic-readiness-report-windows-latest`, retained for 7 days. The Windows job also checks the documented `$LASTEXITCODE` behavior for an expected ref difference. See the [workflow runs](https://github.com/baileynyx/github-migration-readiness/actions/workflows/ci.yml) for results at a specific commit.
 

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "review_size_mb": 2048,
+    "transformation_size_mb": 5120,
+    "review_branch_count": 50,
+    "review_binary_mb": 100,
+    "transformation_binary_mb": 1024
+  },
+  "repositories": [
+    {"name": "synthetic-catalog-api", "source_kind": "git", "size_mb": 380, "branch_count": 7, "binary_mb": 0, "uses_lfs": false, "history_rewrite_required": false},
+    {"name": "synthetic-legacy-tfvc", "source_kind": "tfvc", "size_mb": 1650, "branch_count": 14, "binary_mb": 240, "uses_lfs": false, "history_rewrite_required": true},
+    {"name": "synthetic-media-history", "source_kind": "git", "size_mb": 6840, "branch_count": 82, "binary_mb": 1780, "uses_lfs": true, "history_rewrite_required": false},
+    {"name": "synthetic-undiscovered-worker", "source_kind": "git", "size_mb": null, "branch_count": null, "binary_mb": null, "uses_lfs": null, "history_rewrite_required": null}
+  ]
+}
