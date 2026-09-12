@@ -35,9 +35,9 @@ jobs:
         run: |
           python build_release.py --output-dir dist
           python build_release.py --output-dir dist-repeat
-          python -c "from pathlib import Path; a=Path('dist/github-migration-readiness-1.0.0.zip').read_bytes(); b=Path('dist-repeat/github-migration-readiness-1.0.0.zip').read_bytes(); assert a == b, 'Repeated package builds differ'"
+          python -c "from pathlib import Path; version=Path('VERSION').read_text(encoding='utf-8').strip(); name=f'github-migration-readiness-{version}.zip'; a=(Path('dist')/name).read_bytes(); b=(Path('dist-repeat')/name).read_bytes(); assert a == b, 'Repeated package builds differ'"
       - name: Run the product from the extracted ZIP
-        run: python check_package.py dist/github-migration-readiness-1.0.0.zip --output-dir reports/package
+        run: python -c "from pathlib import Path; import check_package; version=Path('VERSION').read_text(encoding='utf-8').strip(); raise SystemExit(check_package.main(['dist/github-migration-readiness-' + version + '.zip', '--output-dir', 'reports/package']))"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           # Each OS uploads the exact bytes it tested, plus the source commit,
