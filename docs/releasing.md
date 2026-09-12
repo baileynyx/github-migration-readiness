@@ -28,7 +28,7 @@ identical bytes. Neither checksum is an attestation.
 
 CI builds the ZIP twice on each platform and compares hashes. It then verifies
 the archive checksum, member paths and file inventory; extracts into a fresh
-temporary directory outside the checkout; runs the 50 packaged product tests;
+temporary directory outside the checkout; runs the 63 packaged product tests;
 and checks assessments, fixture collection, expected blocking exits and the
 actual Git rehearsal. Python path overrides are removed. No live collection is
 performed. Each platform uploads its ZIP, checksum and `package-check.json`, with
