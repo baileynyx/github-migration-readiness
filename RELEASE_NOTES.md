@@ -1,3 +1,17 @@
+# Version 1.1.0 — candidate
+
+## Added
+
+- Policy-driven pre-migration classification for standard, review and
+  transformation paths.
+- Explicit findings for TFVC, repository size, binary volume, branch count,
+  Git LFS, history rewrites and missing evidence.
+- Synthetic input plus reproducible JSON and Markdown reports.
+- CI and packaged-product coverage for the new classifier.
+
+The thresholds in the synthetic example are planning policy, not vendor limits.
+This candidate does not scan, transform or migrate repositories.
+
 # Version 1.0.0
 
 [Published September 10, 2026](https://github.com/baileynyx/github-migration-readiness/releases/tag/v1.0.0) from
