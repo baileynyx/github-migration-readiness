@@ -38,7 +38,7 @@ jobs:
           python -c "from pathlib import Path; version=Path('VERSION').read_text(encoding='utf-8').strip(); name=f'github-migration-readiness-{version}.zip'; a=(Path('dist')/name).read_bytes(); b=(Path('dist-repeat')/name).read_bytes(); assert a == b, 'Repeated package builds differ'"
       - name: Run the product from the extracted ZIP
         run: python -c "from pathlib import Path; import check_package; version=Path('VERSION').read_text(encoding='utf-8').strip(); raise SystemExit(check_package.main(['dist/github-migration-readiness-' + version + '.zip', '--output-dir', 'reports/package']))"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           # Each OS uploads the exact bytes it tested, plus the source commit,
           # archive hash and observed command results. No release is published.
@@ -81,7 +81,7 @@ jobs:
       # The collector uses a fresh folder and the fixture needs no account/PAT.
       - run: python collect_azure_devops.py --fixture examples/azure-devops/responses.json --output-dir reports/azure-devops
       - run: python readiness.py reports/azure-devops/inventory.json --output-dir reports/azure-devops --fail-on never
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           # Matrix jobs must upload distinct artifacts; each contains its own
           # captures and execution evidence from that platform's actual rehearsal.
